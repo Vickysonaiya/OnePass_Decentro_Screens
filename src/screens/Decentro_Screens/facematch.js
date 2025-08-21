@@ -56,7 +56,7 @@ const FaceMatch = () => {
         stream.getTracks().forEach(track => track.stop());
       }
     };
-  }, []);
+  }, [stream]);
 
   const handleCaptureAndVerify = async () => {
     if (!videoRef.current) return;
