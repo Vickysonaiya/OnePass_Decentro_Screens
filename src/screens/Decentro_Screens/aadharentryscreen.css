@@ -1,0 +1,100 @@
+.aadhaar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f9;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.aadhaar-card {
+  background: white;
+  padding: 28px 20px;
+  border-radius: 12px;
+  width: 340px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.top-logo-section {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.digilocker-logo {
+  height: 30px;
+}
+
+.emblem {
+  height: 30px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.subtext {
+  font-size: 13px;
+  color: gray;
+  margin-bottom: 16px;
+}
+
+.aadhaar-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.aadhaar-icon {
+  height: 18px;
+}
+
+.aadhaar-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.aadhaar-input {
+  width: 60px;
+  height: 45px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.info-text {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.next-button {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.alternate-option {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #5a36f1;
+  cursor: pointer;
+  text-decoration: underline;
+}

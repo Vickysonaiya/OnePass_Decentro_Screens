@@ -1,0 +1,93 @@
+.digilocker-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f6f8fa;
+}
+
+.digilocker-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 360px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.language-select {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+}
+
+.title-section {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-badge {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.instruction-text,
+.keep-handy-text,
+.otp-text,
+.secure-note {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.aadhaar-image-section {
+  text-align: center;
+  margin: 12px 0;
+}
+
+.aadhaar-image {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.checkbox-section {
+  background-color: #fff8dc;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 12px 0;
+}
+
+.proceed-button {
+  width: 100%;
+  background-color: #5a36f1;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.proceed-button:disabled {
+  background-color: #a0d8c1;
+  cursor: not-allowed;
+}
+
+.secure-note {
+  font-size: 12px;
+  text-align: center;
+  color: #28a745;
+  margin-top: 10px;
+}

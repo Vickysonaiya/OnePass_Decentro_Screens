@@ -1,0 +1,176 @@
+/* Main container for the face match component */
+.facematch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  color:#1b3635;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.facematch-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.facematch-subtitle {
+  font-size: 1rem;
+  color: #1b3635;
+  margin-bottom: 20px;
+}
+
+/* Wrapper to position the video and overlay */
+.video-wrapper {
+  position: relative;
+  width: 90vw;
+  max-width: 400px;
+  height: 70vw;
+  max-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  background-color: #000;
+}
+
+/* The live video feed from the camera */
+.facematch-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video fills the container, cropping if necessary */
+  transform: scaleX(-1); /* Mirror effect for front camera */
+}
+
+/* The oval overlay to guide the user's face */
+.facematch-oval {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  height: 85%;
+  border-radius: 50%;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6); /* Creates the "cut-out" effect */
+  border: 3px solid green;
+}
+
+/* The main action button */
+.facematch-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background: #1b3635;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.facematch-btn:hover:not(:disabled) {
+  background: #1b3635;
+  transform: translateY(-2px);
+}
+
+.facematch-btn:disabled {
+  background-color: #1b3635;
+  cursor: not-allowed;
+}
+
+
+/* --- Success Modal Styles --- */
+.verification-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.verification-modal-content {
+  background-color: #fff;
+  color: #333;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  max-width: 350px;
+}
+
+.verification-modal-content h4 {
+  color: #27ae60;
+  font-size: 1.5rem;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.verification-modal-content p {
+  color: #7f8c8d;
+}
+
+/* --- Checkmark Animation --- */
+.success-animation {
+  margin: 0 auto;
+}
+
+.checkmark {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 3;
+  stroke: #27ae60;
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px #27ae60;
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+  margin: 0 auto;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+  stroke: #27ae60;
+  fill: #fff;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 40px #27ae60;
+  }
+}
