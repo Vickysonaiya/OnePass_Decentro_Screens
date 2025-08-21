@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './PhoneNumberScreen.css';
+import './PhoneNumberScreen.css'
 
 function PhoneNumberScreen() {
   const [phone, setPhone] = useState('');
