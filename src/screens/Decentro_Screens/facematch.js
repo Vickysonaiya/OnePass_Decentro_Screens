@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaCamera } from 'react-icons/fa';
+import * as faceapi from 'face-api.js';
 import './facematch.css';
 
 const SuccessModal = ({ message }) => (
@@ -21,15 +22,16 @@ const SuccessModal = ({ message }) => (
 const FaceMatch = () => {
   const navigate = useNavigate();
   const videoRef = useRef(null);
-  const canvasRef = useRef(null); 
+  const canvasRef = useRef(null);
   const [stream, setStream] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
+  const [error, setError] = useState("");
 
-  // Function to start the camera
+  // Start camera
   const startCamera = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'user' }, 
+        video: { facingMode: 'user' },
       });
       setStream(mediaStream);
       if (videoRef.current) {
@@ -41,50 +43,81 @@ const FaceMatch = () => {
     }
   };
 
+  // Load face-api models
+  const loadModels = async () => {
+    await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
+  };
+
   useEffect(() => {
-    startCamera();
+    loadModels().then(startCamera);
 
     return () => {
       if (stream) {
         stream.getTracks().forEach(track => track.stop());
       }
     };
-  }, []); 
+  }, []);
 
-  const handleCaptureAndVerify = () => {
-    if (videoRef.current && canvasRef.current) {
-      const video = videoRef.current;
-      const canvas = canvasRef.current;
+  const handleCaptureAndVerify = async () => {
+    if (!videoRef.current) return;
 
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
+    const detections = await faceapi.detectSingleFace(
+      videoRef.current,
+      new faceapi.TinyFaceDetectorOptions()
+    );
 
-      const context = canvas.getContext('2d');
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-      if (stream) {
-        stream.getTracks().forEach(track => track.stop());
-      }
-      
-      setIsVerified(true);
-
-      setTimeout(() => {
-        navigate('/');
-      }, 2500);
+    if (!detections) {
+      setError("No face detected. Please place your face inside the circle.");
+      return;
     }
+
+    // Get bounding box
+    const { x, y, width, height } = detections.box;
+
+    // Check if face is inside the oval (approximate check)
+    const videoWidth = videoRef.current.videoWidth;
+    const videoHeight = videoRef.current.videoHeight;
+    const centerX = videoWidth / 2;
+    const centerY = videoHeight / 2;
+    const radius = Math.min(videoWidth, videoHeight) / 3;
+
+    const faceCenterX = x + width / 2;
+    const faceCenterY = y + height / 2;
+
+    const distance = Math.sqrt(
+      Math.pow(faceCenterX - centerX, 2) + Math.pow(faceCenterY - centerY, 2)
+    );
+
+    if (distance > radius / 2) {
+      setError("Please align your face properly inside the green circle.");
+      return;
+    }
+
+    setError("");
+    setIsVerified(true);
+
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+    }
+
+    setTimeout(() => {
+      navigate('/');
+    }, 2500);
   };
 
   return (
     <div className="facematch-container">
       <h2 className="facematch-title">Identity Verification</h2>
-      <p className="facematch-subtitle">Center your face in the oval and click the button</p>
-      
+      <p className="facematch-subtitle">Center your face in the green circle and click the button</p>
+
       <div className="video-wrapper">
         <video ref={videoRef} autoPlay playsInline muted className="facematch-video"></video>
         <div className="facematch-oval"></div>
       </div>
-      
+
       <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+
+      {error && <p className="error-message">{error}</p>}
 
       <button className="facematch-btn" onClick={handleCaptureAndVerify} disabled={!stream}>
         <FaCamera style={{ marginRight: 8 }} /> Face Match
