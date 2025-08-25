@@ -19,7 +19,7 @@ function PhoneNumberScreen() {
   return (
     <div className="phone-screen-bg">
       <form className="phone-form" onSubmit={handleSubmit}>
-        <label htmlFor="phone">DigiLocker Phone Number</label>
+        <label htmlFor="phone">Enter Your Aadhar Verified Phone Number</label>
         <input
           id="phone"
           type="text"
