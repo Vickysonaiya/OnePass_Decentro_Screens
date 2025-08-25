@@ -40,6 +40,7 @@
   background: #eaf6fb;
 }
 
+
 .phone-form button {
   padding: 0.75rem 1rem;
   font-size: 1.1rem;
@@ -51,6 +52,26 @@
   font-weight: 600;
   box-shadow: 0 2px 8px 0 rgba(9, 132, 227, 0.08);
   transition: background 0.2s, transform 0.1s;
+  position: relative;
+}
+
+.phone-form button:disabled,
+.phone-form .disabled-btn {
+  background: #b2bec3;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.disabled-icon {
+  display: none;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.phone-form button:disabled:hover .disabled-icon,
+.phone-form .disabled-btn:hover .disabled-icon {
+  display: inline-block;
 }
 
 .phone-form button:hover {

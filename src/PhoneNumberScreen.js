@@ -28,7 +28,14 @@ function PhoneNumberScreen() {
           maxLength={10}
           placeholder="Enter phone number"
         />
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          disabled={!phone}
+          className={!phone ? 'disabled-btn' : ''}
+        >
+          Submit
+          {!phone && <span className="disabled-icon"></span>}
+        </button>
       </form>
     </div>
   );
